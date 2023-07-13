@@ -44,17 +44,31 @@ const EventDetails = () => {
     <div>
       <div>
         <div>
-          <h1>{event.title}</h1>
-          <h3>Hosted By: {event.hostedBy}</h3>
-          <img
-            src={event.eventThumbnail}
-            alt="event"
-            width="500"
-            height="500"
-          />
-          <h2>Details: </h2>
-          <p>{event.eventDescription}</p>
+          <div>
+            <h1>{title}</h1>
+            <h3>Hosted By: {hostedBy}</h3>
+            <img src={eventThumbnail} alt="event" width="500" height="500" />
+            <h2>Details: </h2>
+            <p>{eventDescription}</p>
+            <div>
+              <h3>Additional Information</h3>
+              <p>Dress Code: {additionalInformation.dressCode}</p>
+              <p>Age Restrictions: {additionalInformation.ageRestrictions}</p>
+            </div>
+            <div>
+              <h3>Event Tags:</h3>
+              {eventTags.map(
+                (tag, idx) => tag + (idx < eventTags.length - 1 ? ", " : "")
+              )}
+            </div>
+          </div>
         </div>
+        <div>
+          <div>{eventStartTime}</div>
+          <div>{eventEndTime}</div>
+        </div>
+
+        <div>{location}</div>
       </div>
     </div>
   ) : (
