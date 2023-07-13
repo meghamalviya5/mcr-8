@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import TypeSearch from "../TypeSearch/TypeSearch";
 import { data } from "../../db/data";
 import "./EventList.css";
+import { EventContext } from "../../contexts/EventContext";
+import { Link } from "react-router-dom";
 
 const EventList = () => {
+  const {
+    state: { filteredEvents },
+  } = useContext(EventContext);
+
   return (
     <div>
       <div>
@@ -11,11 +17,18 @@ const EventList = () => {
         <TypeSearch />
       </div>
       <div className="flex flex-space-around flex-gap-4 flex-wrap">
-        {data.meetups.map(
+        {filteredEvents.map(
           ({ id, title, eventThumbnail, eventType, eventStartTime }) => (
-            <div>
-              <img src={eventThumbnail} className="event-card" />
-            </div>
+            <Link to={`/event-details/${id}`}>
+              <div>
+                <div>{eventType}</div>
+                <div>
+                  <img src={eventThumbnail} className="event-card" />
+                  <p>{eventStartTime}</p>
+                  <p>{title}</p>
+                </div>
+              </div>
+            </Link>
           )
         )}
       </div>

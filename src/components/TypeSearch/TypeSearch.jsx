@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
+import { EventContext } from "../../contexts/EventContext";
 
 const TypeSearch = () => {
+  const { searchByType } = useContext(EventContext);
+
   return (
     <div className="flex">
-      <select>
-        <option>Online</option>
-        <option>Offline</option>
-        <option>Both</option>
+      <select onChange={searchByType}>
+        <option value="online">Online</option>
+        <option value="offline">Offline</option>
+        <option value="both">Both</option>
       </select>
     </div>
   );

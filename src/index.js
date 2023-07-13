@@ -5,12 +5,15 @@ import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import reportWebVitals from "./reportWebVitals";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import EventProvider from "./contexts/EventContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <App />
+      <EventProvider>
+        <App />
+      </EventProvider>
     </BrowserRouter>
   </React.StrictMode>
 );
