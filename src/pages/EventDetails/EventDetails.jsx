@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { useParams } from "react-router-dom";
 import { EventContext } from "../../contexts/EventContext";
+import { data } from "../../db/data";
 
 const EventDetails = () => {
   const { eventID } = useParams();
@@ -10,14 +11,14 @@ const EventDetails = () => {
   console.log("event id = ", eventID);
 
   console.log(meetups, "==mt");
-  const event = meetups.filter((event) => {
+  const event = data.meetups.find((event) => {
     console.log(event.id);
     if (event.id == eventID) {
       console.log("got");
+      return event.id == eventID;
     } else {
       console.log("not got");
     }
-    return event.id == eventID;
   });
 
   // console.log("event id = ", event);
