@@ -1,30 +1,26 @@
 import React, { useContext } from "react";
 import { useParams } from "react-router-dom";
 import { EventContext } from "../../contexts/EventContext";
-import { data } from "../../db/data";
+import OutsideClickHandler from "react-outside-click-handler";
+import AddRSVPModal from "../../components/AddRSVPModal/AddRSVPModal";
 
 const EventDetails = () => {
   const { eventID } = useParams();
   const {
-    state: { meetups },
+    state: { meetups, addRSVPModalStatus, RSVPBtnText, RSVPDisabledStatus },
+    dispatch,
   } = useContext(EventContext);
-  console.log("event id = ", eventID);
 
-  console.log(meetups, "==mt");
-  const event = data.meetups.find((event) => {
-    console.log(event.id);
-    if (event.id == eventID) {
-      console.log("got");
-      return event.id == eventID;
-    } else {
-      console.log("not got");
-    }
-  });
+  const event = meetups.find((event) => event.id === eventID);
 
   // console.log("event id = ", event);
 
+  const openAddRSVPModal = (e) => {
+    // e.currentTarget.disabled = true;
+    dispatch({ type: "SET_ADD_RSVP_MODAL_STATUS", payload: true });
+  };
+
   const {
-    id,
     title,
     hostedBy,
     eventThumbnail,
@@ -40,7 +36,7 @@ const EventDetails = () => {
     isPaid,
   } = event;
 
-  return event !== null ? (
+  return (
     <div>
       <div>
         <div>
@@ -68,11 +64,59 @@ const EventDetails = () => {
           <div>{eventEndTime}</div>
         </div>
 
-        <div>{location}</div>
+        <div>
+          <div>{location}</div>
+          <div>{address}</div>
+          <div>&#x20B9;&nbsp; {price}</div>
+        </div>
+
+        <div>
+          <div>
+            <h3>Speaker:</h3>
+          </div>
+          <div>
+            {speakers.length > 0 ? (
+              speakers.map(({ name, image, designation }) => (
+                <div>
+                  <img
+                    src={image}
+                    className="speaker-image"
+                    alt="speaker"
+                    width="20"
+                    height="20"
+                  />
+                  <p>{name}</p>
+                  <p>{designation}</p>
+                </div>
+              ))
+            ) : (
+              <div>No Speakers Available</div>
+            )}
+          </div>
+          <div>
+            {new Date() > eventStartTime ? null : (
+              <button
+                className="btn-rsvp"
+                value={RSVPBtnText}
+                disabled={RSVPDisabledStatus}
+                onClick={(e) => openAddRSVPModal(e)}
+              >
+                {RSVPBtnText}
+              </button>
+            )}
+            <OutsideClickHandler
+              onOutsideClick={() =>
+                dispatch({ type: "SET_ADD_RSVP_MODAL_STATUS", payload: false })
+              }
+            >
+              {addRSVPModalStatus ? (
+                <AddRSVPModal show={addRSVPModalStatus} isPaid={isPaid} />
+              ) : null}
+            </OutsideClickHandler>
+          </div>
+        </div>
       </div>
     </div>
-  ) : (
-    <h3>Loading...</h3>
   );
 };
 

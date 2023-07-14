@@ -5,7 +5,13 @@ import { eventReducer } from "../reducers/EventReducer";
 export const EventContext = createContext();
 
 const EventProvider = ({ children }) => {
-  const initialState = { meetups: data.meetups, filteredEvents: data.meetups };
+  const initialState = {
+    meetups: data.meetups,
+    filteredEvents: data.meetups,
+    addRSVPModalStatus: false,
+    RSVPBtnText: "RSVP",
+    RSVPDisabledStatus: false,
+  };
 
   const [state, dispatch] = useReducer(eventReducer, initialState);
 
