@@ -1,4 +1,36 @@
-.event-card {
-  width: 10rem;
-  height: 10rem;
+.card-image {
+  width: 15rem;
+  height: 15rem;
+  /* position: relative; */
+  border-radius: 0.7rem;
+}
+
+.card-tag {
+  position: absolute;
+  top: 1rem;
+  left: 0.5rem;
+  padding: 0.2rem 0.3rem;
+  background-color: white;
+  border-radius: 0.5rem;
+}
+
+.card {
+  padding: 1rem 2rem;
+}
+
+.event-link {
+  color: black;
+  text-decoration: none;
+}
+
+.event-time {
+}
+
+.event-name {
+  font-size: 1.3rem;
+}
+
+.period {
+  font-size: larger;
+  /* padding-bottom: 1rem; */
 }

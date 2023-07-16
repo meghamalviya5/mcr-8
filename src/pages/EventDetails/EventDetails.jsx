@@ -1,8 +1,17 @@
 import React, { useContext } from "react";
 import { useParams } from "react-router-dom";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faClock,
+  faLocationDot,
+  faIndianRupeeSign,
+} from "@fortawesome/free-solid-svg-icons";
+
 import { EventContext } from "../../contexts/EventContext";
 import OutsideClickHandler from "react-outside-click-handler";
 import AddRSVPModal from "../../components/AddRSVPModal/AddRSVPModal";
+import "./EventDetails.css";
 
 const EventDetails = () => {
   const { eventID } = useParams();
@@ -13,10 +22,7 @@ const EventDetails = () => {
 
   const event = meetups.find((event) => event.id === eventID);
 
-  // console.log("event id = ", event);
-
   const openAddRSVPModal = (e) => {
-    // e.currentTarget.disabled = true;
     dispatch({ type: "SET_ADD_RSVP_MODAL_STATUS", payload: true });
   };
 
@@ -37,66 +43,86 @@ const EventDetails = () => {
   } = event;
 
   return (
-    <div>
-      <div>
+    <div className="flex flex-gap-details">
+      <div className="flex flex-col">
         <div>
+          <h1>{title}</h1>
+          <div>Hosted By: </div>
+          <div className="fw-xl">{hostedBy}</div>
+          <img src={eventThumbnail} alt="event" className="event-details-img" />
+          <h2>Details: </h2>
+          <div className="desc">{eventDescription}</div>
+          <div className="">
+            <h2>Additional Information</h2>
+            <div>
+              <span className="extra-info-item">Dress Code: </span>
+              {additionalInformation.dressCode}
+            </div>
+            <div>
+              <span className="extra-info-item">Age Restrictions: </span>
+              {additionalInformation.ageRestrictions}
+            </div>
+          </div>
           <div>
-            <h1>{title}</h1>
-            <h3>Hosted By: {hostedBy}</h3>
-            <img src={eventThumbnail} alt="event" width="500" height="500" />
-            <h2>Details: </h2>
-            <p>{eventDescription}</p>
+            <h2>Event Tags:</h2>
+            {eventTags.map((tag, idx) => (
+              <div className="tags fw-bold">
+                {tag}
+                {/* {tag + (idx < eventTags.length - 1 ? ", " : "")} */}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+      <div className="flex flex-col">
+        <div className="flex flex-col flex-row-gap-2 time-venue-price">
+          <div className="flex flex-col-gap-1">
             <div>
-              <h3>Additional Information</h3>
-              <p>Dress Code: {additionalInformation.dressCode}</p>
-              <p>Age Restrictions: {additionalInformation.ageRestrictions}</p>
+              <FontAwesomeIcon icon={faClock} />
             </div>
             <div>
-              <h3>Event Tags:</h3>
-              {eventTags.map(
-                (tag, idx) => tag + (idx < eventTags.length - 1 ? ", " : "")
-              )}
+              <div> {eventStartTime}</div>
+              <div>{eventEndTime}</div>
             </div>
+          </div>
+          <div className="flex flex-col-gap-1">
+            <div>
+              <FontAwesomeIcon icon={faLocationDot} />
+            </div>
+            <div>
+              <div>{location}</div>
+              <div>{address}</div>
+            </div>
+          </div>
+          <div className="flex flex-col-gap-1">
+            {/* &#x20B9;&nbsp;  */}
+            <div>
+              <FontAwesomeIcon icon={faIndianRupeeSign} />
+            </div>
+            <div>{price}</div>
           </div>
         </div>
         <div>
-          <div>{eventStartTime}</div>
-          <div>{eventEndTime}</div>
-        </div>
-
-        <div>
-          <div>{location}</div>
-          <div>{address}</div>
-          <div>&#x20B9;&nbsp; {price}</div>
-        </div>
-
-        <div>
           <div>
-            <h3>Speaker:</h3>
+            <h2>Speaker:</h2>
           </div>
-          <div>
+          <div className="flex flex-col-gap-2 ">
             {speakers.length > 0 ? (
               speakers.map(({ name, image, designation }) => (
-                <div>
-                  <img
-                    src={image}
-                    className="speaker-image"
-                    alt="speaker"
-                    width="20"
-                    height="20"
-                  />
-                  <p>{name}</p>
-                  <p>{designation}</p>
+                <div className="speaker-card flex flex-col flex-center">
+                  <img src={image} className="speaker-image" alt="speaker" />
+                  <div className="fw-bolder">{name}</div>
+                  <div>{designation}</div>
                 </div>
               ))
             ) : (
               <div>No Speakers Available</div>
             )}
           </div>
-          <div>
+          <div className="flex flex-center">
             {new Date() > eventStartTime ? null : (
               <button
-                className="btn-rsvp"
+                className="btn-rsvp fw-bold"
                 value={RSVPBtnText}
                 disabled={RSVPDisabledStatus}
                 onClick={(e) => openAddRSVPModal(e)}
@@ -106,7 +132,10 @@ const EventDetails = () => {
             )}
             <OutsideClickHandler
               onOutsideClick={() =>
-                dispatch({ type: "SET_ADD_RSVP_MODAL_STATUS", payload: false })
+                dispatch({
+                  type: "SET_ADD_RSVP_MODAL_STATUS",
+                  payload: false,
+                })
               }
             >
               {addRSVPModalStatus ? (

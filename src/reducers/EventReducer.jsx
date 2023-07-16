@@ -16,6 +16,15 @@ export const eventReducer = (state, action) => {
     case "SET_RSVP_DISABLED_STATUS":
       return { ...state, RSVPDisabledStatus: action.payload };
 
+    case "UPDATE_FILTERS":
+      return {
+        ...state,
+        filters: {
+          ...state.filters,
+          [action.payload.key]: action.payload.value,
+        },
+      };
+
     default:
       return { state };
   }

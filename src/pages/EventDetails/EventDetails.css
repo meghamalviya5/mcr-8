@@ -1,0 +1,67 @@
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  /* grid-auto-rows: minmax(100px, auto); */
+}
+
+.column-2 {
+  margin-left: 5rem;
+}
+
+.event-details-img {
+  width: 40rem;
+  height: 25rem;
+  margin-top: 3rem;
+}
+
+.desc {
+  width: 40rem;
+}
+
+.flex-gap-details {
+  column-gap: 15rem;
+}
+
+.tags {
+  display: inline-block;
+  background-color: #f55758;
+  color: white;
+  padding: 1rem 2rem;
+  margin: 0 1rem;
+  border-radius: 0.5rem;
+}
+
+.extra-info-item {
+  font-weight: bolder;
+}
+
+.time-venue-price {
+  background-color: beige;
+  padding: 1.5rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  width: 19rem;
+  border-radius: 0.5rem;
+}
+
+.speaker-card {
+  background-color: beige;
+  padding: 1rem;
+  border-radius: 1rem;
+}
+
+.speaker-image {
+  width: 4rem;
+  height: 3.5rem;
+  border-radius: 50%;
+}
+
+.btn-rsvp {
+  background-color: #f65859;
+  color: white;
+  padding: 1rem 5rem;
+  margin: 1rem;
+  border-radius: 0.5rem;
+  border: none;
+}

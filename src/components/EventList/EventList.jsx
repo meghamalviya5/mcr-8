@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+
 import TypeSearch from "../TypeSearch/TypeSearch";
 import "./EventList.css";
 import { EventContext } from "../../contexts/EventContext";
@@ -11,12 +12,12 @@ const EventList = () => {
   } = useContext(EventContext);
 
   return (
-    <div>
-      <div>
+    <div className="flex flex-col">
+      <div className="flex flex-space-between">
         <h1>Meetup Events</h1>
         <TypeSearch />
       </div>
-      <div className="flex flex-space-around flex-gap-4 flex-wrap">
+      <div className="card flex flex-space-around flex-row-gap-2 flex-col-gap-4 flex-wrap">
         {filteredEvents.map(
           ({ id, title, eventThumbnail, eventType, eventStartTime }) => (
             <Link
@@ -25,17 +26,31 @@ const EventList = () => {
                 dispatch({ type: "SET_RSVP_BUTTON_TEXT", payload: "RSVP" });
                 dispatch({ type: "SET_RSVP_DISABLED_STATUS", payload: false });
               }}
+              className="event-link"
+              key={id}
             >
               <div>
-                <div>{eventType}</div>
                 <div>
-                  <img
-                    src={eventThumbnail}
-                    className="event-card"
-                    alt="meetup"
-                  />
-                  <p>{eventStartTime}</p>
-                  <p>{title}</p>
+                  <div className="relative">
+                    <img
+                      src={eventThumbnail}
+                      className="card-image"
+                      alt="meetup"
+                    />
+                    <div className="card-tag">{eventType} Event</div>
+                  </div>
+                  <div className="event-time">
+                    {new Date(eventStartTime).toDateString()}&nbsp;
+                    <span className="period">.</span>
+                    &nbsp;
+                    {new Date(eventStartTime).toLocaleTimeString()}
+                    {new Date(eventStartTime)
+                      .toString()
+                      .includes("India Standard Time")
+                      ? " IST"
+                      : ""}
+                  </div>
+                  <div className="event-name fw-bolder">{title}</div>
                 </div>
               </div>
             </Link>

@@ -8,7 +8,7 @@ function App() {
   return (
     <div className="App">
       <Navbar />
-      <hr />
+
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/event-details/:eventID" element={<EventDetails />} />

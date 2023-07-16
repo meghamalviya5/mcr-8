@@ -6,8 +6,24 @@
   flex-direction: column;
 }
 
-.flex-gap-4 {
+.flex-row-gap-1 {
   gap: 1rem;
+}
+
+.flex-row-gap-2 {
+  gap: 2rem;
+}
+
+.flex-col-gap-1 {
+  column-gap: 1rem;
+}
+
+.flex-col-gap-2 {
+  column-gap: 2rem;
+}
+
+.flex-col-gap-4 {
+  column-gap: 4rem;
 }
 
 .flex-space-between {
@@ -18,8 +34,26 @@
   justify-content: space-around;
 }
 
+.flex-center {
+  justify-content: center;
+  align-items: center;
+}
+
 .flex-wrap {
   flex-wrap: wrap;
+}
+
+.flex-cx-center {
+  align-items: center;
+}
+
+/* positions */
+.relative {
+  position: relative;
+}
+
+.absolute {
+  position: absolute;
 }
 
 .p-xs {
@@ -64,4 +98,29 @@
 
 .txt-left {
   text-align: left;
+}
+
+/* font styles */
+.fw-bold {
+  font-weight: bold;
+}
+
+.fw-bolder {
+  font-weight: bolder;
+}
+
+.fw-xl {
+  font-weight: 700;
+}
+
+.txt-s {
+  font-size: 1rem;
+}
+
+.txt-m {
+  font-size: 1.5rem;
+}
+
+.txt-l {
+  font-size: 3rem;
 }
