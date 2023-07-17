@@ -72,6 +72,14 @@
   border-radius: 50%;
 }
 
+.br-xs {
+  border-radius: 0.5rem;
+}
+
+.br-s {
+  border-radius: 1rem;
+}
+
 .mt-xs {
   margin-top: 0.5rem;
 }

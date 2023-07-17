@@ -6,10 +6,7 @@ import { EventContext } from "../../contexts/EventContext";
 import { Link } from "react-router-dom";
 
 const EventList = () => {
-  const {
-    state: { filteredEvents },
-    dispatch,
-  } = useContext(EventContext);
+  const { filteredEvents, dispatch } = useContext(EventContext);
 
   return (
     <div className="flex flex-col">

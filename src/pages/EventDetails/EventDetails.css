@@ -65,3 +65,18 @@
   border-radius: 0.5rem;
   border: none;
 }
+
+.m-wrapper {
+  position: relative;
+}
+
+.darkBG {
+  /* background-color: rgba(0, 0, 0, 0.2);
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute; */
+}

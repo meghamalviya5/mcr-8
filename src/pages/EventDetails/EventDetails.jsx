@@ -130,7 +130,7 @@ const EventDetails = () => {
                 {RSVPBtnText}
               </button>
             )}
-            <OutsideClickHandler
+            {/* <OutsideClickHandler
               onOutsideClick={() =>
                 dispatch({
                   type: "SET_ADD_RSVP_MODAL_STATUS",
@@ -141,7 +141,10 @@ const EventDetails = () => {
               {addRSVPModalStatus ? (
                 <AddRSVPModal show={addRSVPModalStatus} isPaid={isPaid} />
               ) : null}
-            </OutsideClickHandler>
+            </OutsideClickHandler> */}
+            {addRSVPModalStatus ? (
+              <AddRSVPModal show={addRSVPModalStatus} isPaid={isPaid} />
+            ) : null}
           </div>
         </div>
       </div>
